@@ -17,7 +17,7 @@ def solve_maze(maze):
     # Panggil fungsi rekursif untuk menemukan jalan keluar
     if find_path(maze, start[0], start[1], end[0], end[1], visited):
         print("Jalan keluar ditemukan:")
-        print_solution(visited)
+        print_solution(maze, visited)
     else:
         print("Tidak ada jalan keluar.")
 
@@ -44,13 +44,15 @@ def find_path(maze, x, y, end_x, end_y, visited):
 
     return False
 
-def print_solution(visited):
-    for row in visited:
-        for cell in row:
-            if cell:
-                print("0", end=" ")  # Tembok
+def print_solution(maze, visited):
+    for i in range(len(visited)):
+        for j in range(len(visited[0])):
+            if visited[i][j]:
+                print("x", end=" ")  # Rute solusi
+            elif maze[i][j] == 1:
+                print("1", end=" ")  # Tembok
             else:
-                print("1", end=" ")  # Jalan
+                print("0", end=" ")  # Jalan
         print()
 
 # Contoh labirin (0 = jalan, 1 = tembok)
